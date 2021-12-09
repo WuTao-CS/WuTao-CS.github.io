@@ -1,0 +1,349 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bert与GPT的区别 | Sugar Blog</title><meta name="keywords" content="NLP"><meta name="author" content="Tao Wu"><meta name="copyright" content="Tao Wu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. 网络结构上的区别 上图是Transformer的一个网络结构图，Bert的网络结构类似于Transformer的Encoder部分，而GPT类似于Transformer的Decoder部分。单从网络的组成部分的结构上来看，其最明显的在结构上的差异为Multi-Head-Attention和Masked Multi-Head-Attention。 为了解释清楚这两个的区别，先来看看self-a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bert与GPT的区别">
+<meta property="og:url" content="https://wutao-cs.github.io/2021/12/09/Bert%E4%B8%8EGPT%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:site_name" content="Sugar Blog">
+<meta property="og:description" content="1. 网络结构上的区别 上图是Transformer的一个网络结构图，Bert的网络结构类似于Transformer的Encoder部分，而GPT类似于Transformer的Decoder部分。单从网络的组成部分的结构上来看，其最明显的在结构上的差异为Multi-Head-Attention和Masked Multi-Head-Attention。 为了解释清楚这两个的区别，先来看看self-a">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://w.wallhaven.cc/full/rd/wallhaven-rd6zem.jpg">
+<meta property="article:published_time" content="2021-12-09T08:01:31.000Z">
+<meta property="article:modified_time" content="2021-12-09T08:03:13.997Z">
+<meta property="article:author" content="Tao Wu">
+<meta property="article:tag" content="NLP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://w.wallhaven.cc/full/rd/wallhaven-rd6zem.jpg"><link rel="shortcut icon" href="/./img/avatar.jpg"><link rel="canonical" href="https://wutao-cs.github.io/2021/12/09/Bert%E4%B8%8EGPT%E7%9A%84%E5%8C%BA%E5%88%AB/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Bert与GPT的区别',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-12-09 16:03:13'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 我的朋友</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://w.wallhaven.cc/full/rd/wallhaven-rd6zem.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Sugar Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 我的朋友</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Bert与GPT的区别</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-09T08:01:31.000Z" title="发表于 2021-12-09 16:01:31">2021-12-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-12-09T08:03:13.997Z" title="更新于 2021-12-09 16:03:13">2021-12-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/NLP/">NLP</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Bert与GPT的区别"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-网络结构上的区别"><a href="#1-网络结构上的区别" class="headerlink" title="1. 网络结构上的区别"></a>1. 网络结构上的区别</h2><p><img src="https://img-blog.csdnimg.cn/ec85d815b27247b99cd82002618d2de6.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5qKm5Zyo6L-c5pa54piv,size_12,color_FFFFFF,t_70,g_se,x_16"></p>
+<p>上图是Transformer的一个网络结构图，Bert的网络结构类似于Transformer的Encoder部分，而GPT类似于Transformer的Decoder部分。单从网络的组成部分的结构上来看，其最明显的在结构上的差异为<strong>Multi-Head-Attention</strong>和<strong>Masked Multi-Head-Attention</strong>。</p>
+<p>为了解释清楚这两个的区别，先来看看self-attention</p>
+<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h3><img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210404202435331.png" alt="image-20210404202435331" style="zoom: 33%;" />
+
+<p>Self-Attention的Input,它就是一串的Vector，我们用$a$来表示它，代表它有可能是前面已经做过一些处理,它是某个隐藏层的输出,输入一排a这个向量以后,Self-Attention要输出另外一排b这个向量。下面来看看如何输出$b^1 b^2 b^3 b^4$</p>
+<p>用最简单的点积方式来计算q为例子：</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210404211656032.png" alt="image-20210404211656032" style="zoom: 50%;" />
+
+<p>把$a^1$乘上$W^q $得到$q^1$，然后，把$a^1$乘上$W^k$,得到$k$这个Vector,把这个$q^1$,跟这个$k^2$相乘就得到α</p>
+<p>这边用$α_{1,2}$来代表说,Query是1提供的,Key是2提供的时候,这个α这个关联性叫做Attention的分数。</p>
+<p>接下来也要跟$a^3 a^4$来计算</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210404211950882.png" alt="image-20210404211950882" style="zoom: 50%;" />
+
+<p>把$a_3$乘上$W^k$,得到另外一个Key也就是$k^3$,$a^4$乘上$W^k$得到$k^4$,然后再把$k^3$这个Key,跟$q^1$这个Query做Inner-Product,得到1跟3之间的关联性,得到1跟3的Attention,把$k^4$跟$q^1$做点积,得到$α_{1,4}$（1跟4之间的关联性）</p>
+<p>计算出a1跟每一个向量的关联性以后,接下来这边会接入一个SoftMax</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210404212945356.png" alt="image-20210404212945356" style="zoom:50%;" />
+
+<p>通过Soft-Max就得到$α’$</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210404213559086.png" alt="image-20210404213559086" style="zoom:50%;" />
+
+<ul>
+<li><p>首先把$a^1$到$a^4$这边每一个向量,乘上$W^v $得到新的向量,这边分别就是用$v^1 v^2 v^3 v^4$来表示</p>
+</li>
+<li><p>接下来把这边的$v^1$到$v^4$,每一个向量都去乘上Attention的分数,都去乘上$α’$</p>
+</li>
+<li><p>然后再把它加起来,得到$b^1$</p>
+</li>
+</ul>
+<p>$$<br>b^1=\sum_i\alpha’_{1,i}v^i<br>$$</p>
+<p>这就是Self-Attention的过程</p>
+<h3 id="Multi-Head-Attention"><a href="#Multi-Head-Attention" class="headerlink" title="Multi-Head-Attention"></a>Multi-Head-Attention</h3><p>Self-attention 有一个进阶的版本,叫做 Multi-head Self-attention, 顾名思义，Multi-head Self-attention，相比较于Self-attention自然是使用了较多的head，需要用多少的 head,这个又是另外一个 超参数也是需要调的</p>
+<p>为什么会需要比较多的 head 呢？</p>
+<p>在做这个 Self-attention 的时候,我们就是用 q 去找相关的 k,但是相关这件事情有很多种不同的形式,有很多种不同的定义,所以也许我们不能只有一个 q,我们应该要有多个 q,不同的 q 负责不同种类的相关性。</p>
+<p>其具体操作为(以一个两个head为例)：</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/e96c84ba7861bd37bc31b683dee4fda6.png" alt="image-20210412193656512"></p>
+<ul>
+<li>先把 a 乘上一个矩阵得到 q</li>
+<li>再把 q 乘上另外两个矩阵,分别得到 $q^1$ 跟 $q^2$,那这边还有 这边是用两个上标,i 代表的是位置,然后这个 1 跟 2 代表是,这个位置的第几个 q,所以这边有 $q^{i,1}$ 跟 $q^{i,2}$,代表说我们有两个 head</li>
+</ul>
+<p>既然 q 有两个,那 k 也就要有两个,那 v 也就要有两个,从 q 得到 $q^1 q^2$,从 k 得到 $k^1 k^2$,从 v 得到 $v^1 v^2$,那其实就是把 q 把 k 把 v,分别乘上两个矩阵,得到这个不同的 head。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/d4106b3e2196fc92092ae69e8409779f.png" alt="image-20210412194346086"></p>
+<ul>
+<li>所以 $q_{i,1}$ 就跟 $k^{i,1}$ 算 attention</li>
+<li>$q_{i,1}$ 就跟 $k^{j,1}$ 算 attention,也就是算这个点积,然后得到这个 attention 的分数</li>
+<li>把 attention 的分数乘 $v^{i,1}$,把 attention 的分数乘 $v^{j,1}$</li>
+<li>然后接下来就得到 $b^{i,1}$</li>
+</ul>
+<p>这边只用了其中一个 head,对于另一个 head,也做一模一样的事情</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210412194533453.png" alt="image-20210412194533453" style="zoom:50%;" />
+
+<p>所以 $q^2$ 只对 $k^2$ 做 attention,它们在做 weighted sum 的时候,只对 $v^2$ 做 weighted sum,然后就得到 $b^{i,2}$</p>
+<p>如果有多个 head,有 8 个 head 有 16 个 head,那也是一样的操作,那这边是用两个 head 来当作例子</p>
+<p>然后把 $b^{i,1}$ 跟 $b^{i,2}$,把它接起来,然后再通过一个 transform</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210412194643379.png" alt="image-20210412194643379" style="zoom:67%;" />
+
+<p>也就是再乘上一个矩阵,然后得到 bi,然后再送到下一层去,那这个就是 Multi-head attention</p>
+<h3 id="Masked-Multi-Head-Attention"><a href="#Masked-Multi-Head-Attention" class="headerlink" title="Masked Multi-Head-Attention"></a>Masked Multi-Head-Attention</h3><p>使用mask的原因是因为在预测句子的时候，当前时刻是无法获取到未来时刻的信息的。也就是Multi-Head-Attention可以看到Input的整个句子，而Masked Multi-Head-Attention只能看到当前输入之前的内容，无法看到之后的内容</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210606122539643.png" alt="image-20210606122539643" style="zoom:50%;" />
+
+<p>例如，在本例子中，输入<BOS>的时候，不会看到后面的信息，输入台的时候，我们也没法看到“湾大学”的字样。这就是Masked Multi-Head-Attention和Multi-Head-Attention的主要区别。</p>
+<h2 id="2-预训练任务区别"><a href="#2-预训练任务区别" class="headerlink" title="2.预训练任务区别"></a>2.预训练任务区别</h2><p>在Bert与GPT的预训练任务的选取上，Bert与GPT所用的模型也存在着较大的差异。</p>
+<h3 id="Bert——Masking-Input"><a href="#Bert——Masking-Input" class="headerlink" title="Bert——Masking Input"></a>Bert——Masking Input</h3><p>在Bert的预训练任务中，Bert主要使用“填空题”的方式来完成预训练：</p>
+<p>随机盖住一些输入的文字，被mask的部分是随机决定的，当我们输入一个句子时，其中的一些词会被随机mask。</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210531145127641.png" alt="image-20210531145127641" style="zoom: 50%;" />
+
+<p>mask的具体实现有两种方法。</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210531154230714.png" alt="image-20210531154230714" style="zoom: 50%;" />
+
+<ul>
+<li>第一种方法是，用一个特殊的符号替换句子中的一个词，我们用 “MASK “标记来表示这个特殊符号，可以把它看作一个新字，这个字完全是一个新词，它不在字典里，这意味着mask了原文。</li>
+<li>另外一种方法，随机把某一个字换成另一个字。中文的 “湾”字被放在这里，然后可以选择另一个中文字来替换它，它可以变成 “一 “字，变成 “天 “字，变成 “大 “字，或者变成 “小 “字，我们只是用随机选择的某个字来替换它</li>
+</ul>
+<p>两种方法都可以使用。使用哪种方法也是随机决定的。因此，当BERT进行训练时，向BERT输入一个句子，先随机决定哪一部分的汉字将被mask。</p>
+<p>mask后，一样是输入一个序列，我们把BERT的相应输出看作是另一个序列，接下来，我们在输入序列中寻找mask部分的相应输出，然后，这个向量将通过一个Linear transform，输入向量将与一个矩阵相乘，然后做softmax，输出一个分布。。</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210531155411799.png" alt="image-20210531155411799" style="zoom: 50%;" />
+
+<p>这与我们在Seq2Seq模型中提到的使用transformer进行翻译时的输出分布相同。输出是一个很长的向量，包含我们想要处理的每个汉字，每一个字都对应到一个分数。</p>
+<p>在训练过程中。我们知道被mask的字符是什么，而BERT不知道，我们可以用一个one-hot vector来表示这个字符，并使输出和one-hot vector之间的交叉熵损失最小。</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210531162753479.png" alt="image-20210531162753479" style="zoom:50%;" />
+
+<p>BERT要做的是，预测什么被盖住。被掩盖的字符，属于 “湾”类。</p>
+<p>在训练中，我们在BERT之后添加一个线性模型，并将它们一起训练，尝试去预测被覆盖的字符是什么。</p>
+<h3 id="GPT——Predict-Next-Token"><a href="#GPT——Predict-Next-Token" class="headerlink" title="GPT——Predict Next Token"></a>GPT——Predict Next Token</h3><p>GPT要做的任务是,预测接下来,会出现的token是什么</p>
+<p>举例来说,假设训练资料里面,有一个句子是台湾大学,那GPT拿到这一笔训练资料的时候,选取BOS这个Token所对应的输出,作为Embedding的结果,用这个embedding去预测下一个应该出现的token是什么</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210606121532206.png" alt="image-20210606121532206" style="zoom:50%;" />
+
+<p>那在这个句子里面,根据这笔训练资料,下一个应该出现的token是”台”,要训练模型,根据第一个token,根据BOS给的embedding,那它要输出”台”这个token</p>
+<p>这个部分,有一个embedding,这边用h来表示,然后通过一个Linear Transform,再通过一个softmax,得到一个概率分布,我们希望这个输出的概率分布,跟正确答案的交叉熵越小越好。</p>
+<p>接下来要做的事情,就是以此类推了,输入BOS跟”台”,它产生embedding,接下来它会预测,下一个出现的token是什么,以此类推来训练模型。</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210606121740014.png" alt="image-20210606121740014" style="zoom:50%;" />
+
+
+
+
+
+<h2 id="3-使用方法的区别"><a href="#3-使用方法的区别" class="headerlink" title="3.使用方法的区别"></a>3.使用方法的区别</h2><p>对于Bert和GPT，其本意是提供一个预训练模型，使得人们可以方便的将其运用于下流（downstream）任务当中去。当然，这两种模型最后使用的方法也是有一些区别的。</p>
+<h3 id="Bert的使用方法——以情感分类为例"><a href="#Bert的使用方法——以情感分类为例" class="headerlink" title="Bert的使用方法——以情感分类为例"></a>Bert的使用方法——以情感分类为例</h3><img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210531193903820.png" alt="image-20210531193903820" style="zoom: 67%;" />
+
+<p>只要给它一个句子，也就是你想用它来判断情绪的句子，然后把CLS标记放在这个句子的前面，扔到BERT中,这4个输入实际上对应着4个输出。然后，我们只看CLS的部分。CLS在这里输出一个向量，我们对它进行Linear transform，也就是将它乘以一个Linear transform的矩阵，然后进行Softmax，就可以得到情感分类的结果。</p>
+<p>Bert的使用大多如此，用CLS对应的Output作为Embedding的结果，然后根据不同的任务进行对应的操作来fine-turing，从某方面而言，更像是利用深度学习对文本进行特征表示的过程。</p>
+<h3 id="GPT的使用方法"><a href="#GPT的使用方法" class="headerlink" title="GPT的使用方法"></a>GPT的使用方法</h3><p>对于GPT使用，由于GPT的参数是Bert的4倍有余，使得去fine-turing一个模型需要更长，更大的训练时间。因此GPT提出了一个更加“疯狂”的使用方式，一种更接近于人类的使用方式。</p>
+<p>没有进行梯度下降的”Few short leaning”，也就GPT论文所提到的“In-context learning”</p>
+<p>举例来说假设要GPT这个模型做翻译</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210606124815390.png" alt="image-20210606124815390" style="zoom:50%;" />
+
+<ul>
+<li>先打Translate English to French，这个句子代表问题的描述</li>
+<li>然后给它几个范例</li>
+<li>最后接下来给一个Cheese的词，让他翻译成法语。</li>
+</ul>
+<h4 id="“One-shot”-Learning-“Zero-shot”-Learning"><a href="#“One-shot”-Learning-“Zero-shot”-Learning" class="headerlink" title="“One-shot” Learning  “Zero-shot” Learning"></a>“One-shot” Learning  “Zero-shot” Learning</h4><p>例如我们在考听力测验的时候,都只给一个例子而已,那GPT可不可以只看一个例子,就知道它要做翻译，这个叫One-shot Learning</p>
+<p>还有更厉害的是Zero-shot Learning,直接给它一个叙述,说现在要做翻译了,来看GPT能不能够自己就看得懂,就自动知道说要来做翻译这件事情。</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210606125626034.png" alt="image-20210606125626034" style="zoom:50%;" />
+
+<p>GPT在没有微调的情况下，这种使用方法虽然准确率不够高，但是随着GPT参数量的增加，在一定程度上仍然有着一定的准确率。</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210606125840803.png" alt="image-20210606125840803" style="zoom:50%;" />
+
+<p>PT参数量的增加，在一定程度上仍然有着一定的准确率。</p>
+<img src="https://gitee.com/unclestrong/deep-learning21_note/raw/master/imgbed/image-20210606125840803.png" alt="image-20210606125840803" style="zoom:50%;" />
+
+<p>这就是GPT相比较于Bert更加独特的一种使用方式。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Tao Wu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://wutao-cs.github.io/2021/12/09/Bert%E4%B8%8EGPT%E7%9A%84%E5%8C%BA%E5%88%AB/">https://wutao-cs.github.io/2021/12/09/Bert%E4%B8%8EGPT%E7%9A%84%E5%8C%BA%E5%88%AB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://WuTao-CS.github.io" target="_blank">Sugar Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/NLP/">NLP</a></div><div class="post_share"><div class="social-share" data-image="https://w.wallhaven.cc/full/rd/wallhaven-rd6zem.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/12/09/2021%E5%B9%B4%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BF%9D%E7%A0%94%E8%AE%B0%E5%BD%95/"><img class="next-cover" src="https://w.wallhaven.cc/full/l3/wallhaven-l3d1gq.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2021年计算机保研记录</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81NDg5NC8zMTM2Mw=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Tao Wu</div><div class="author-info__description">但行好事，莫问前程</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Wutao-CS/"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/WuTao-CS" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/wutao.cs@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/747866429" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">来日方长，未来可期</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E4%B8%8A%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.</span> <span class="toc-text">1. 网络结构上的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Self-Attention"><span class="toc-number">1.1.</span> <span class="toc-text">Self-Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multi-Head-Attention"><span class="toc-number">1.2.</span> <span class="toc-text">Multi-Head-Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Masked-Multi-Head-Attention"><span class="toc-number">1.3.</span> <span class="toc-text">Masked Multi-Head-Attention</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%A2%84%E8%AE%AD%E7%BB%83%E4%BB%BB%E5%8A%A1%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">2.预训练任务区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bert%E2%80%94%E2%80%94Masking-Input"><span class="toc-number">2.1.</span> <span class="toc-text">Bert——Masking Input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPT%E2%80%94%E2%80%94Predict-Next-Token"><span class="toc-number">2.2.</span> <span class="toc-text">GPT——Predict Next Token</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">3.使用方法的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bert%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E2%80%94%E2%80%94%E4%BB%A5%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB%E4%B8%BA%E4%BE%8B"><span class="toc-number">3.1.</span> <span class="toc-text">Bert的使用方法——以情感分类为例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPT%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">GPT的使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%9COne-shot%E2%80%9D-Learning-%E2%80%9CZero-shot%E2%80%9D-Learning"><span class="toc-number">3.2.1.</span> <span class="toc-text">“One-shot” Learning  “Zero-shot” Learning</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/12/09/Bert%E4%B8%8EGPT%E7%9A%84%E5%8C%BA%E5%88%AB/" title="Bert与GPT的区别"><img src="https://w.wallhaven.cc/full/rd/wallhaven-rd6zem.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Bert与GPT的区别"/></a><div class="content"><a class="title" href="/2021/12/09/Bert%E4%B8%8EGPT%E7%9A%84%E5%8C%BA%E5%88%AB/" title="Bert与GPT的区别">Bert与GPT的区别</a><time datetime="2021-12-09T08:01:31.000Z" title="发表于 2021-12-09 16:01:31">2021-12-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/09/2021%E5%B9%B4%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BF%9D%E7%A0%94%E8%AE%B0%E5%BD%95/" title="2021年计算机保研记录"><img src="https://w.wallhaven.cc/full/l3/wallhaven-l3d1gq.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2021年计算机保研记录"/></a><div class="content"><a class="title" href="/2021/12/09/2021%E5%B9%B4%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BF%9D%E7%A0%94%E8%AE%B0%E5%BD%95/" title="2021年计算机保研记录">2021年计算机保研记录</a><time datetime="2021-12-09T07:56:05.000Z" title="发表于 2021-12-09 15:56:05">2021-12-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/04/hello-world/" title="Hello World"><img src="https://w.wallhaven.cc/full/l3/wallhaven-l3d1gq.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/12/04/hello-world/" title="Hello World">Hello World</a><time datetime="2021-12-04T15:38:10.672Z" title="发表于 2021-12-04 23:38:10">2021-12-04</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://w.wallhaven.cc/full/rd/wallhaven-rd6zem.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2021 By Tao Wu</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">很高兴认识你</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
+
+if ('Livere' === 'Livere' || !true) {
+  if (true) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

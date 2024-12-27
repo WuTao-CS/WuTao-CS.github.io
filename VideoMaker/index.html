@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<!-- <link href="https://fonts.cdnfonts.com/css/caveat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Handlee&v1" rel="stylesheet">
+
+<style>
+    @import url('https://fonts.cdnfonts.com/css/caveat');
+</style> -->
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>VideoMaker</title>
+  <link rel="icon" type="image/x-icon" href="static/images/logo.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <img src="static/images/logo6.png" style="height:256px; margin-bottom: -10px;"></img>
+            <h1 class="title is-3 publication-title">VideoMaker: Zero-shot Customized Video Generation with the Inherent Force of Video Diffusion Models</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=F4lns_oAAAAJ&hl" target="_blank">Tao Wu</a><sup>1,2*</sup>,</span>
+                <span class="author-block">
+                  <a href="https://yzhang2016.github.io/" target="_blank">Yong Zhang</a><sup>3*</sup>,</span>
+                  <span class="author-block">
+                    <a href="https://vinthony.github.io/academic/" target="_blank">Xiaodong Cun</a><sup>3*</sup>,
+                  </span>
+                  <span class="author-block">
+                    <a href="https://scholar.google.com/citations?user=zJvrrusAAAAJ" target="_blank">Zhongang Qi</a><sup>4†</sup>
+                  </span>
+                  <span class="author-block">
+                    <a href="https://pujunfu.github.io/" target="_blank">Junfu Pu</a><sup>2</sup>,
+                  </span>
+                  <span class="author-block">
+                    <a href="https://scholar.google.com/citations?user=N0kaKcwAAAAJ" target="_blank">Huanzhang Dou</a><sup>1</sup>,
+                  </span>
+                  <span class="author-block">
+                    <a href="https://scholar.google.com/citations?user=i1PqK7kAAAAJ" target="_blank">Guangcong Zheng</a><sup>1</sup>,
+                  </span>
+                  <span class="author-block">
+                    <a href="https://scholar.google.com/citations?user=4oXBp9UAAAAJ" target="_blank">Ying Shan</a><sup>2,3</sup>
+                  </span>
+                  <span class="author-block">
+                    <a href="https://person.zju.edu.cn/xilics" target="_blank">Xi Li</a><sup>1†</sup>
+                  </span>
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block"><sup>1</sup>Zhejiang University</span>&nbsp;&nbsp;
+                    <span class="author-block"><sup>2</sup>ARC Lab, Tencent PCG</span>&nbsp;&nbsp;
+                    <span class="author-block"><sup>3</sup>Tencent AI Lab</span></span>&nbsp;&nbsp;
+                    <span class="author-block"><sup>4</sup>Huawei Noah's Ark Lab</span> \\
+                    <span class="author-block">* These authors contributed equally. † Corresponding author.</span>
+                  </div>
+                  <br>
+                  <!-- <img src="static/images/logo5.png" style="height:256px; margin-bottom: -10px;"></img> -->
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                    <span class="link-block">
+                        <a href="./Paper.pdf" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="ai ai-arxiv"></i>
+                        </span>
+                        <span>arXiv</span>
+                      </a>
+                    </span>
+                    <!-- Supplementary PDF link -->
+                    <span class="link-block">
+                      <a href="./Appendix.pdf" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Supplementary</span>
+                    </a>
+                  </span>
+
+                  <span class="link-block">
+                    <a href=""
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code (Coming Soon)</span>
+                      </a>
+
+                  </span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Teaser video-->
+<section class="hero teaser is-light" align="center">
+  <div class="container is-max-desktop">
+    <br>
+    <h2 class="title is-3">Demo</h2>
+    
+    <div class="hero-body">
+      <video poster="" id="tree" autoplay controls muted loop height="100%">
+        <!-- Your video here -->
+        <source src="static/videos/VideoMaker_Demo_Video.mp4"
+        type="video/mp4">
+      </video>
+      <!-- <h2 class="subtitle has-text-centered">
+        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
+      </h2> -->
+    </div>
+  </div>
+</section>
+
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="hero is-small">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Zero-shot customized video generation has gained significant attention due to its substantial application potential. Existing methods rely on additional models to extract and inject reference subject features, assuming that the Video Diffusion Model (VDM) alone is insufficient for zero-shot customized video generation. However, these methods often struggle to maintain consistent subject appearance due to suboptimal feature extraction and injection techniques. In this paper, we reveal that VDM inherently possesses the force to extract and inject subject features. Departing from previous heuristic approaches, we introduce a novel framework that leverages VDM's inherent force to enable high-quality zero-shot customized video generation. Specifically, for feature extraction, we directly input reference images into VDM and use its intrinsic feature extraction process, which not only provides fine-grained features but also significantly aligns with VDM's pre-trained knowledge. For feature injection, we devise an innovative bidirectional interaction between subject features and generated content through spatial self-attention within VDM, ensuring that VDM has better subject fidelity while maintaining the diversity of the generated video. Experiments on both customized human and object video generation validate the effectiveness of our framework.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Paper poster -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-">
+          <h2 class="title is-3">Method</h2>
+          <div class="content has-text-justified">
+        <div>
+          <td colspan="3"><img src="static/images/pipline.png" alt="" width="1000" /></td>
+        </div>
+      <p>Overall pipeline of VideoMaker. We directly input the reference image into VDM and use VDM's modules for fine-grained feature extraction. We modified the computation of spatial self-attention to enable feature injection. Additionally, to distinguish between reference features and generated content, we designed the Guidance Information Recognition Loss to optimize the training strategy. Our method achieves <b>high-fidelity zero-shot customized human and object video generation</b> based on <b>AnimateDiff</b></p>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--End paper poster -->
+
+<!-- video preload="auto"carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <!-- <div class="container is-max-desktop"> -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column custom-width">
+          <h2 class="title is-3">Customized Celebrity Video Generation Results</h2>
+          <div class="content has-text-justified" align="center">
+            <div id="results-carousel" class="carousel results-carousel" align="center">
+              <div class="item item-video1">
+                <video preload="auto"poster="" id="video1" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/1_lecun.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video2">
+                <video preload="auto"poster="" id="video2" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/2_lifeifei.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video3">
+                <video preload="auto"poster="" id="video3" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/3_obama.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video4">
+                <video preload="auto"poster="" id="video4" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/4_hinton.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video5">
+                <video preload="auto"poster="" id="video5" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/5_liuyifei.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video6">
+                <video preload="auto"poster="" id="video6" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/6_leijun.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video6">
+                <video preload="auto"poster="" id="video6" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/7_dilireba.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video6">
+                <video preload="auto"poster="" id="video6" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/8_huge.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video6">
+                <video preload="auto"poster="" id="video6" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/9_trump.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+    
+        </div>
+      </div>
+  </div>
+  <p align="center">Qualitative comparison of customized human video generation on celebrity. We selected the AnimateDiff SD1.5 version as our base video diffusion model. Since PhotoMaker only has pretrained weights for the SDXL, we used the results generated with AnimateDiff SDXL at a resolution of 512×512 for comparison. </p>
+</section>
+<!-- End video preload="auto"carousel -->
+
+<!-- video preload="auto"carousel -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <!-- <div class="container is-max-desktop"> -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column custom-width">
+          <h2 class="title is-3">Customized Non-celebrity Video Generation Results</h2>
+          <div class="content has-text-justified" align="center">
+            <div id="results-carousel" class="carousel results-carousel" align="center">
+              <div class="item item-video1">
+                <video preload="auto"poster="" id="video1" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/normal_1.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video2">
+                <video preload="auto"poster="" id="video2" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/normal_2.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video3">
+                <video preload="auto"poster="" id="video3" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/normal_3.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video4">
+                <video preload="auto"poster="" id="video4" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/normal_4.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video5">
+                <video preload="auto"poster="" id="video5" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/normal_5.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video6">
+                <video preload="auto"poster="" id="video6" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/normal_6.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video6">
+                <video preload="auto"poster="" id="video6" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/normal_7.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video6">
+                <video preload="auto"poster="" id="video6" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/normal_8.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video6">
+                <video preload="auto"poster="" id="video6" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/normal_9.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+    
+        </div>
+      </div>
+  </div>
+  <p align="center">Qualitative comparison of customized human video generation on non-celebrity. We selected the AnimateDiff SD1.5 version as our base video diffusion model. Since PhotoMaker only has pretrained weights for the SDXL, we used the results generated with AnimateDiff SDXL at a resolution of 512×512 for comparison. </p>
+</section>
+<!-- End video preload="auto"carousel -->
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <!-- <div class="container is-max-desktop"> -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column custom-width">
+          <h2 class="title is-3">Customized Object Video Generation.</h2>
+          <div class="content has-text-justified" align="center">
+            <div id="results-carousel" class="carousel results-carousel" align="center">
+              <div class="item item-video1">
+                <video preload="auto"poster="" id="video1" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/object_1.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video2">
+                <video preload="auto"poster="" id="video2" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/object_2.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video3">
+                <video preload="auto"poster="" id="video3" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/object_3.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video4">
+                <video preload="auto"poster="" id="video4" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/object_4.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video5">
+                <video preload="auto"poster="" id="video5" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/object_5.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video6">
+                <video preload="auto"poster="" id="video6" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/object_6.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video6">
+                <video preload="auto"poster="" id="video6" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/object_7.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video6">
+                <video preload="auto"poster="" id="video6" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/object_8.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-video6">
+                <video preload="auto"poster="" id="video6" autoplay controls muted loop width="1024px">
+                  <!-- Your video preload="auto"file here -->
+                  <source src="static/videos/object_9.mp4"
+                  type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+    
+        </div>
+      </div>
+  </div>
+  <p align="center">Qualitative comparison of customized object video generation </p>
+</section>
+
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column custom-width">
+          <h2 class="title is-3">References</h2>
+          <div class="content has-text-justified">
+            <p>
+              <a name="IP-adapter" id="IP-adapter"></a>
+              [1] Ye H, Zhang J, Liu S, et al. IP-adapter: Text compatible image prompt adapter for text-to-image diffusion models[J]. arXiv preprint arXiv:2308.06721, 2023.
+            </p>
+            <p>
+              <a name="ID-Animator" id="ID-Animator"></a>
+              [2] He X, Liu Q, Qian S, et al. ID-Animator: Zero-shot identity-preserving human video generation[J]. arXiv preprint arXiv:2404.15275, 2024.
+            </p>
+            <p>
+              <a name="PhotoMaker" id="PhotoMaker"></a>
+              [3] Li Z, Cao M, Wang X, et al. PhotoMaker: Customizing realistic human photos via stacked id embedding[C]//Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2024: 8640-8650.
+            </p>
+            <p>
+              <a name="Videobooth" id="Videobooth"></a>
+              [4] Jiang Y, Wu T, Yang S, et al. Videobooth: Diffusion-based video generation with image prompts[C]//Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2024: 6689-6700.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>  
+</section>
+
+
+<!--BibTex citation -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+      @article{wu2024customcrafter,
+        title={VideoMaker: Zero-shot Customized Video Generation with the Inherent Force of Video Diffusion Models},
+        author={Wu, Tao and Zhang, Yong and Cun, Xiaodong and Qi, Zhongang and Pu, Junfu and Dou, Huanzhang and Zheng, Guangcong and Shan, Ying and Li, Xi},
+        journal={arXiv preprint arXiv:2412.***},
+        year={2024}
+      }
+    </code></pre>
+  </div>
+</section>
+<!--End BibTex citation -->
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
+            <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        const videoWrappers = document.querySelectorAll('.video-wrapper');
+      
+        videoWrappers.forEach(wrapper => {
+          const defaultVideo = wrapper.querySelector('.default-video');
+          const aspectRatio = defaultVideo.videoWidth / defaultVideo.videoHeight;
+          const height = wrapper.offsetWidth / aspectRatio;
+      
+          wrapper.style.height = `${height}px`;
+      
+          wrapper.addEventListener('mouseenter', () => {
+            defaultVideo.pause();
+            hoverVideo.play();
+          });
+      
+          wrapper.addEventListener('mouseleave', () => {
+            defaultVideo.play();
+            hoverVideo.pause();
+          });
+        });
+      }); 
+      $(document).ready(function() {
+        var carouselItems = $('.carousel .item');
+        var numItems = carouselItems.length;
+        var numVideos = 5;
+        var currentIndex = 0;
+    
+        $('.carousel').on('click', function() {
+          currentIndex++;
+          if (currentIndex + numVideos <= numItems) {
+            carouselItems.removeClass('active');
+            carouselItems.slice(currentIndex, currentIndex + numVideos).addClass('active');
+          } else {
+            currentIndex = 0;
+            carouselItems.removeClass('active');
+            carouselItems.slice(currentIndex, currentIndex + numVideos).addClass('active');
+          }
+        });
+    
+        carouselItems.slice(currentIndex, currentIndex + numVideos).addClass('active');
+      });
+    </script>
+</body>
+</html>

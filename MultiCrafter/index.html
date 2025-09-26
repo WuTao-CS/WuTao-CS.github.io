@@ -1,0 +1,321 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>MultiCrafter: High-Fidelity Multi-Subject Generation via Disentangled Attention and Identity-Aware Preference Alignment</title>
+<link rel="icon" href="static/umo_files/teaser/umo_2.webp" type="image/png">
+
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet">
+<link href="static/css/bulma.min.css" rel="stylesheet">
+<link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+<link rel="stylesheet" href="static/css/bulma-slider.min.css">
+<link href="static/css/fontawesome.all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+<link href="static/css/style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Chewy:regular" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script:regular" rel="stylesheet" />
+
+</head>
+
+<body>
+<div class="column has-text-centered" style="background: #ffffff;width: 100%">
+  <br>
+  <br>
+  <h1 class="title is-1 publication-title">
+    <span style="font-size: 60px; color:#d95b0b; font-weight: bold; font-family: Kaushan Script,regular">
+      <strong>MultiCrafter</strong></span><br>
+    <span style="font-size: 40px; font-weight: bold; font-family: Chewy,regular; background: linear-gradient(to right, #007BFF, #8E44AD); -webkit-background-clip: text; color: transparent;">
+      <strong>High-Fidelity Multi-Subject Generation via</strong></span><br>
+        <span style="font-size: 40px; color:#363636; font-weight: bold; font-family: Chewy,regular; letter-spacing: 1.5px;">
+          <strong>Disentangled Attention and Identity-Aware Preference Alignment</strong></span>
+    <div id="authors" style="text-align: center; font-size: 1.1rem; margin-top: 20px;">
+    <span style="color:#40b3e9; font-family: 'Gill Sans', sans-serif;"><a href="https://wutao-cs.github.io/" target="_blank">Tao Wu</a><sup>1*</sup>,</span>&ensp;
+    <span style="color:#40b3e9; font-family: 'Gill Sans', sans-serif;"><a href="https://github.com/jiangyb13" target="_blank">Yibo Jiang</a><sup>1*</sup>,</span>&ensp;
+    <span style="color:#40b3e9; font-family: 'Gill Sans', sans-serif;"><a href="https://scholar.google.com/citations?user=UcRwoesAAAAJ" target="_blank">Yehao Lu</a><sup>1</sup>,</span>&ensp;
+    <span style="color:#40b3e9; font-family: 'Gill Sans', sans-serif;"><a href="https://scholar.google.com/citations?user=FAKmXzoAAAAJ" target="_blank">Zhizhong Wang</a><sup>2</sup>,</span>&ensp;
+    <span style="color:#40b3e9; font-family: 'Gill Sans', sans-serif;"><a href="https://scholar.google.com/citations?user=TfN8wX8AAAAJ" target="_blank">Zeyi Huang</a><sup>2</sup>,</span>&ensp;
+    <span style="color:#40b3e9; font-family: 'Gill Sans', sans-serif;"><a href="https://scholar.google.com/citations?user=D-Wyao4AAAAJ" target="_blank">Zequn Qin</a><sup>1</sup>,</span>&ensp;
+    <span style="color:#40b3e9; font-family: 'Gill Sans', sans-serif;"><a href="https://person.zju.edu.cn/xilics" target="_blank">Xi Li</a><sup>1†</sup></span>
+    
+    <div style="margin-top: 10px; color: #40b3e9; font-size: 0.95rem;">
+        <span style="font-family: 'Gill Sans', sans-serif;"><sup>1</sup>Zhejiang University</span>&ensp;
+        <span style="font-family: 'Gill Sans', sans-serif;"><sup>2</sup>Huawei</span>
+    </div>
+    <div class="column has-text-centered">
+            <div class="publication-links">
+                  <!-- Arxiv PDF link -->
+            <span class="link-block", style="margin-right: 10px; color: #ffffff;">
+                <a href="https://arxiv.org/abs/2412.19645" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+                </span>
+                <span>arXiv</span>
+              </a>
+            </span>
+
+          <span class="link-block", style="margin-right: 10px; color: #ffffff;">
+            <a href="https://github.com/WuTao-CS/MultiCrafter/"
+              class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                   <svg class="svg-inline--fa fa-github fa-w-16" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+              </span>
+              <span>Code (Coming soon)</span>
+              </a>
+
+          </span>
+    </div>
+</div>
+
+<section class="hero is-small">
+  <div class="hero-body" style="background: #e9e9e9; width: 100%; padding: 0;">
+    <div class="carousel-teaser-container" id="container">
+      <div class="carousel-teaser" id="carousel">
+        <img src="static/multicrafter_files/teaser/1.png" alt="Image 1" class="teaser-img">
+        <img src="static/multicrafter_files/teaser/2.png" alt="Image 2" class="teaser-img">
+        <img src="static/multicrafter_files/teaser/3.png" alt="Image 3" class="teaser-img">
+
+        <img src="static/multicrafter_files/teaser/1.png" alt="Image 1" class="teaser-img">
+        <img src="static/multicrafter_files/teaser/2.png" alt="Image 2" class="teaser-img">
+        <img src="static/multicrafter_files/teaser/3.png" alt="Image 3" class="teaser-img">
+
+        <img src="static/multicrafter_files/teaser/1.png" alt="Image 1" class="teaser-img">
+        <img src="static/multicrafter_files/teaser/2.png" alt="Image 2" class="teaser-img">
+        <img src="static/multicrafter_files/teaser/3.png" alt="Image 3" class="teaser-img">
+
+        <img src="static/multicrafter_files/teaser/1.png" alt="Image 1" class="teaser-img">
+        <img src="static/multicrafter_files/teaser/2.png" alt="Image 2" class="teaser-img">
+        <img src="static/multicrafter_files/teaser/3.png" alt="Image 3" class="teaser-img">
+      </div>
+    </div>
+  </div>
+  <div class="drag-instruction">
+    ✨ Press and hold the mouse button to drag and view
+  </div>
+</section>
+
+<div class="content_two">
+  <h2 style="text-align:center; color:#363636;"><b>Abstract</b></h2>
+  <br>
+  <p>Multi-subject image generation aims to synthesize user-provided subjects in a single image while preserving subject fidelity, ensuring prompt consistency, and aligning with human aesthetic preferences. However, existing methods, particularly those built on the In-Context-Learning paradigm, are limited by their reliance on simple reconstruction-based objectives, leading to both severe attribute leakage that compromises subject fidelity and failing to align with nuanced human preferences. To address this, we propose MultiCrafter, a framework that ensures high-fidelity, preference-aligned generation. First, we find that the root cause of attribute leakage is a significant entanglement of attention between different subjects during the generation process. Therefore, we introduce explicit positional supervision to explicitly separate attention regions for each subject, effectively mitigating attribute leakage. To enable the model to accurately plan the attention region of different subjects in diverse scenarios, we employ a Mixture-of-Experts architecture to enhance the model's capacity, allowing different experts to focus on different scenarios. Finally, we design a novel online reinforcement learning framework to align the model with human preferences, featuring a scoring mechanism to accurately assess multi-subject fidelity and a more stable training strategy tailored for the MoE architecture. Experiments validate that our framework significantly improves subject fidelity while aligning with human preferences better.</p>
+</div>
+
+<br>
+
+<div class="content_two">
+  <h2 style="text-align:center; color:#363636;"><b>How does it work?</b></h2><br>
+  <img class="summary-img" src="static/multicrafter_files/method/1.png" style="width:100%;">
+<br>
+  <p> Our framework is built on three core innovations: (Top Left) Identity-Disentangled Attention Regularization uses positional supervision to prevent attribute leakage; (Top Right) the MoE-LORA architecture boosts model capacity for diverse scenarios; and (Bottom) the Identity-Preserving Preference Alignment framework employs a novel online reinforcement learning strategy with a Multi-ID Alignment Reward and the stable GSPO algorithm to align the model with human preferences.</p>
+</div>
+<br>
+
+<br>
+
+<div class="content_two">
+  <h2 style="text-align:center; color:#363636;"><b>Results of Multi-Human Personalization.</b></h2>
+
+  <br>
+  <img class="summary-img" src="static/multicrafter_files/comparison/1.png" style="width:100%;">
+  <br>
+
+  <br>
+  <img class="summary-img" src="static/multicrafter_files/slider/2.png" style="width:100%;">
+  <br>
+
+  <br>
+  <img class="summary-img" src="static/multicrafter_files/slider/3.png" style="width:100%;">
+  <br>
+</div>
+
+<br>
+<div class="content_two">
+  <h2 style="text-align:center; color:#363636;"><b>Results of Multi-Object Personalization.</b></h2>
+  <br>
+  <img class="summary-img" src="static/multicrafter_files/slider/1.png" style="width:100%;">
+  <br>
+</div>
+
+<br>
+<div class="content_two">
+  <h2 style="text-align:center; color:#363636;"><b>Results of Single-Subject Personalization.</b></h2>
+  <br>
+  <img class="summary-img" src="static/multicrafter_files/slider/4.png" style="width:100%;">
+  <br>
+
+  <br>
+  <img class="summary-img" src="static/multicrafter_files/slider/5.png" style="width:100%;">
+  <br>
+
+  <br>
+  <img class="summary-img" src="static/multicrafter_files/slider/6.png" style="width:100%;">
+  <br>
+</div>
+
+<!-- <div class="result-instruction" style="font-size: 18px;">
+  ✨ If you find this project useful for your research, please consider citing our paper:
+</div>  -->
+<div class="teaser_text" style="color: #fefefd; font-size: 18px; text-align: left;">
+  <pre><code>@article{wu2024videomaker,
+        title={VideoMaker: Zero-shot Customized Video Generation with the Inherent Force of Video Diffusion Models},
+        author={Wu, Tao and Zhang, Yong and Cun, Xiaodong and Qi, Zhongang and Pu, Junfu and Dou, Huanzhang and Zheng, Guangcong and Shan, Ying and Li, Xi},
+        journal={arXiv preprint arXiv:2412.19645},
+        year={2024}
+      }</code></pre>
+<br>
+<br>
+<div class="content_two">
+  <p style="text-align: center; color:#363636;">
+    This page was built on the <span class="publication-authors"><a href="https://github.com/bytedance/UMO/tree/gh-pages" target="_blank">UMO</a> Template</Template></span>.
+  </p>
+</div>
+<br>
+
+
+<script>
+window.addEventListener('load', function() {
+  const container = document.getElementById('container');
+  const carousel = document.getElementById('carousel');
+  const images = document.querySelectorAll('.teaser-img');
+
+  // Core state variables
+  let isDragging = false;
+  let startX = 0;
+  let currentX = 0;
+  let scrollSpeed = 1; // Scrolling speed
+  let loopWidth = 0;   // Total width of one image set
+  let isMouseOver = false;
+
+  // Initialization
+  function init() {
+    if (images.length === 0) return;
+
+    // Calculate width
+    const firstImg = images[0];
+    const imgWidth = firstImg.offsetWidth || 600;
+    loopWidth = (imgWidth + 10) * 6;
+
+    // Start scrolling
+    requestAnimationFrame(autoScroll);
+  }
+
+  // Set position
+  function setPosition(x) {
+    currentX = x;
+    carousel.style.transform = `translateX(${currentX}px)`;
+  }
+
+  // Auto scroll logic
+  function autoScroll() {
+    if (!isMouseOver && !isDragging && loopWidth > 0) {
+      currentX -= scrollSpeed;
+
+      if (currentX <= -loopWidth) {
+        currentX += loopWidth;
+      }
+
+      setPosition(currentX);
+    }
+    requestAnimationFrame(autoScroll);
+  }
+
+  // Drag start
+  carousel.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    isDragging = true;
+    startX = e.clientX - currentX;
+    carousel.classList.add('dragging');
+    // Temporarily disable hover effects during dragging to prevent conflicts
+    images.forEach(img => {
+      img.style.pointerEvents = 'none';
+    });
+  });
+
+  // Drag move
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const newX = e.clientX - startX;
+    setPosition(newX);
+  });
+
+  // Drag end
+  document.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+
+    isDragging = false;
+    carousel.classList.remove('dragging');
+    // Restore hover effects
+    images.forEach(img => {
+      img.style.pointerEvents = 'auto';
+    });
+
+    // Boundary correction
+    if (currentX > 0) {
+      carousel.style.transition = 'transform 0.3s ease-out';
+      setPosition(currentX - loopWidth);
+      setTimeout(() => {
+        carousel.style.transition = '';
+      }, 300);
+    } else if (currentX < -loopWidth * 2) {
+      carousel.style.transition = 'transform 0.3s ease-out';
+      setPosition(currentX + loopWidth);
+      setTimeout(() => {
+        carousel.style.transition = '';
+      }, 300);
+    }
+  });
+
+  // Hover control
+  container.addEventListener('mouseenter', () => {
+    isMouseOver = true;
+  });
+
+  container.addEventListener('mouseleave', () => {
+    isMouseOver = false;
+    isDragging = false;
+    carousel.classList.remove('dragging');
+    carousel.style.transition = '';
+    // Ensure hover effects are restored when leaving
+    images.forEach(img => {
+      img.style.pointerEvents = 'auto';
+    });
+  });
+
+  // Touch device support
+  carousel.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    startX = e.touches[0].clientX - currentX;
+    carousel.classList.add('dragging');
+  }, { passive: false });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const newX = e.touches[0].clientX - startX;
+    setPosition(newX);
+  }, { passive: false });
+
+  document.addEventListener('touchend', () => {
+    if (!isDragging) return;
+
+    isDragging = false;
+    carousel.classList.remove('dragging');
+
+    if (currentX > 0) {
+      carousel.style.transition = 'transform 0.3s ease-out';
+      setPosition(currentX - loopWidth);
+      setTimeout(() => carousel.style.transition = '', 300);
+    } else if (currentX < -loopWidth * 2) {
+      carousel.style.transition = 'transform 0.3s ease-out';
+      setPosition(currentX + loopWidth);
+      setTimeout(() => carousel.style.transition = '', 300);
+    }
+  });
+
+  // Initialize on load
+  init();
+});
+</script>
+</body>
+</html>

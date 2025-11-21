@@ -98,7 +98,7 @@
 <div class="content_two">
   <h2 style="text-align:center; color:#363636;"><b>Abstract</b></h2>
   <br>
-  <p>Multi-subject image generation aims to synthesize user-provided subjects in a single image while preserving subject fidelity, ensuring prompt consistency, and aligning with human aesthetic preferences. However, existing methods, particularly those built on the In-Context-Learning paradigm, are limited by their reliance on simple reconstruction-based objectives, leading to both severe attribute leakage that compromises subject fidelity and failing to align with nuanced human preferences. To address this, we propose MultiCrafter, a framework that ensures high-fidelity, preference-aligned generation. First, we find that the root cause of attribute leakage is a significant entanglement of attention between different subjects during the generation process. Therefore, we introduce explicit positional supervision to explicitly separate attention regions for each subject, effectively mitigating attribute leakage. To enable the model to accurately plan the attention region of different subjects in diverse scenarios, we employ a Mixture-of-Experts architecture to enhance the model's capacity, allowing different experts to focus on different scenarios. Finally, we design a novel online reinforcement learning framework to align the model with human preferences, featuring a scoring mechanism to accurately assess multi-subject fidelity and a more stable training strategy tailored for the MoE architecture. Experiments validate that our framework significantly improves subject fidelity while aligning with human preferences better.</p>
+  <p>Multi-subject image generation aims to synthesize user-provided subjects in a single image while preserving subject fidelity, ensuring prompt consistency, and aligning with human aesthetic preferences. Existing In-Context-Learning based methods are limited by their highly coupled training paradigm. These methods attempt to achieve both high subject fidelity and multi-dimensional human preference alignment within a single training stage, relying on a single, indirect reconstruction loss, which is difficult to simultaneously satisfy both these goals. To address this, we propose MultiCrafter, a framework that decouples this task into two distinct training stages. First, in a pre-training stage, we introduce an explicit positional supervision mechanism that effectively resolves attention bleeding and drastically enhances subject fidelity. Second, in a post-training stage, we propose Identity-Preserving Preference Optimization, a novel online reinforcement learning framework. We feature a scoring mechanism to accurately assess multi-subject fidelity based on the Hungarian matching algorithm, which allows the model to optimize for aesthetics and prompt alignment while ensuring subject fidelity achieved in the first stage. Experiments validate that our decoupling framework significantly improves subject fidelity while aligning with human preferences better.</p>
 </div>
 
 <br>
@@ -107,7 +107,7 @@
   <h2 style="text-align:center; color:#363636;"><b>How does it work?</b></h2><br>
   <img class="summary-img" src="static/multicrafter_files/method/1.png" style="width:100%;">
 <br>
-  <p> Our framework is built on three core innovations: (Top Left) Identity-Disentangled Attention Regularization uses positional supervision to prevent attribute leakage; (Top Right) the MoE-LORA architecture boosts model capacity for diverse scenarios; and (Bottom) the Identity-Preserving Preference Alignment framework employs a novel online reinforcement learning strategy with a Multi-ID Alignment Reward and the stable GSPO algorithm to align the model with human preferences.</p>
+  <p> Overall pipeline of MultiCrafter. Our framework is built on two core innovations: (Top) Identity-Disentangled Attention Regularization uses positional supervision to prevent attribute leakage and the MoE-LORA architecture to boost model capacity for diverse scenarios; and (Bottom) the Identity-Preserving Preference Alignment framework employs a novel online reinforcement learning strategy with a Multi-ID Alignment Reward and the stable GSPO algorithm to align the model with human preferences.</p>
 </div>
 <br>
 
@@ -126,6 +126,10 @@
 
   <br>
   <img class="summary-img" src="static/multicrafter_files/slider/3.png" style="width:100%;">
+  <br>
+
+  <br>
+  <img class="summary-img" src="static/multicrafter_files/slider/7.png" style="width:100%;">
   <br>
 </div>
 
@@ -153,26 +157,6 @@
   <br>
 </div>
 
-<!-- <div class="result-instruction" style="font-size: 18px;">
-  ✨ If you find this project useful for your research, please consider citing our paper:
-</div>  -->
-<div class="teaser_text" style="color: #fefefd; font-size: 18px; text-align: left;">
-  <pre><code>@misc{wu2025multicrafter,
-      title={MultiCrafter: High-Fidelity Multi-Subject Generation via Spatially Disentangled Attention and Identity-Aware Reinforcement Learning}, 
-      author={Tao Wu and Yibo Jiang and Yehao Lu and Zhizhong Wang and Zeyi Huang and Zequn Qin and Xi Li},
-      year={2025},
-      eprint={2509.21953},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2509.21953}, 
-}</code></pre>
-<br>
-<br>
-<div class="content_two">
-  <p style="text-align: center; color:#363636;">
-    This page was built on the <span class="publication-authors"><a href="https://github.com/bytedance/UMO/tree/gh-pages" target="_blank">UMO</a> Template</Template></span>.
-  </p>
-</div>
 <br>
 
 
